@@ -19,23 +19,7 @@
                 </rewrite>
             </catalog>
         </models>
-        <blocks>
-            <bubble_api>
-                <class>Bubble_Api_Block</class>
-            </bubble_api>
-        </blocks>
     </global>
-    <adminhtml>
-        <translate>
-            <modules>
-                <Bubble_Api>
-                    <files>
-                        <default>Bubble_Api.csv</default>
-                    </files>
-                </Bubble_Api>
-            </modules>
-        </translate>
-    </adminhtml>
     <default>
         <bubble_api>
             <config>
