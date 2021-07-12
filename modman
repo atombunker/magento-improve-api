@@ -3,3 +3,7 @@
 src/app/code/community/Bubble/Api            app/code/community/Bubble/Api
 # app/etc
 src/app/etc/modules/Bubble_Api.xml            app/etc/modules/Bubble_Api.xml
+# app/locale
+src/app/locale/fr_FR/Bubble_Api.csv            app/locale/fr_FR/Bubble_Api.csv
+# app/design
+src/app/design/adminhtml/base/default/template/bubble/api/system/config/fieldset/hint.phtml            app/design/adminhtml/base/default/template/bubble/api/system/config/fieldset/hint.phtml
