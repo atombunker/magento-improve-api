@@ -52,48 +52,4 @@ class Bubble_Api_Model_Catalog_Product_Api extends Mage_Catalog_Model_Product_Ap
             Mage::helper('bubble_api/catalog_product')->associateProducts($product, $simpleSkus, $priceChanges, $configurableAttributes);
         }
     }
-
-    public function info($productId, $store = null, $attributes = null, $identifierType = null)
-    {
-        // make sku flag case-insensitive
-        if (!empty($identifierType)) {
-            $identifierType = strtolower($identifierType);
-        }
-
-        $product = $this->_getProduct($productId, $store, $identifierType);
-
-        $result = array( // Basic product data
-            'product_id' => $product->getId(),
-            'sku'        => $product->getSku(),
-            'set'        => $product->getAttributeSetId(),
-            'type'       => $product->getTypeId(),
-            'categories' => $product->getCategoryIds(),
-            'websites'   => $product->getWebsiteIds()
-        );
-
-        // start custom code
-        if($product->getTypeId() == 'configurable') {
-            $child = array();
-            $attrs = array();
-            $childProducts = Mage::getModel('catalog/product_type_configurable')
-                                   ->getUsedProducts(null,$product);
-            foreach($childProducts as $childProduct) {
-                $child[] = $childProduct->getId();
-            }
-            $attrs = $product->getTypeInstance(true)->getConfigurableAttributesAsArray($product);
-            $result['child'] = json_encode($child);
-            $result['attrs'] = json_encode($attrs);
-        }
-        
-        // end custom code
-
-        foreach ($product->getTypeInstance(true)->getEditableAttributes($product) as $attribute) {
-            if ($this->_isAllowedAttribute($attribute, $attributes)) {
-                $result[$attribute->getAttributeCode()] = $product->getData(
-                                                                $attribute->getAttributeCode());
-            }
-        }
-
-        return $result;
-    }
 }
